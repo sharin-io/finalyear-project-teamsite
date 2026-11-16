@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team · Huachang Growmax</title>
+<style>
+  :root {
+    --navy: #002855;
+    --ink: #142033;
+    --muted: #526277;
+    --line: #d7e1ec;
+    --paper: #f3f6fa;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 40px 24px 32px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .kicker {
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #9eb4d4;
+    font-weight: 700;
+  }
+  h1 {
+    margin: 8px 0 0;
+    font-size: clamp(32px, 5vw, 44px);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  main { padding: 28px 24px 48px; }
+  .team {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .photo {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background: #e7eef6 center/cover no-repeat;
+    display: grid;
+    place-items: center;
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px var(--line);
+    margin-bottom: 12px;
+  }
+  .card h2 { margin: 0; font-size: 18px; }
+  .role { color: var(--navy); font-size: 13px; font-weight: 700; margin: 4px 0; }
+  .id { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
+  .link {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--navy);
+    color: white;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .link.missing { background: #eef2f6; color: #7b8796; pointer-events: none; }
+  .project { margin-bottom: 28px; }
+  .project h2 { margin: 0 0 8px; font-size: 22px; color: var(--navy); letter-spacing: -0.02em; }
+  .project p { margin: 0 0 14px; max-width: 680px; color: var(--muted); line-height: 1.45; }
+  .stage {
+    position: relative;
+    background: var(--navy);
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+  .stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stage .empty {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    color: #9eb4d4; font-size: 14px;
+  }
+  .cap {
+    position: absolute; left: 14px; bottom: 14px;
+    background: rgba(0, 40, 85, 0.88);
+    color: white;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px; font-weight: 700;
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border: 0; border-radius: 50%;
+    background: white; color: var(--navy); font-size: 18px; font-weight: 700;
+    cursor: pointer;
+  }
+  .prev { left: 12px; }
+  .next { right: 12px; }
+  .dots { display: flex; gap: 6px; margin-top: 10px; }
+  .dots button {
+    width: 8px; height: 8px; border-radius: 50%; border: 0;
+    background: #c5d0dc; padding: 0; cursor: pointer;
+  }
+  .dots button.on { background: var(--navy); }
+  footer { color: var(--muted); font-size: 13px; padding: 0 24px 28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">COS40006 · Swinburne University of Technology</div>
+    <h1>Team</h1>
+  </div>
+</header>
+<main class="wrap">
+  <section class="project">
+    <h2>Final-year project</h2>
+    <p>A warehouse, production, and delivery system for Huachang Growmax, a fertilizer manufacturer in Nilai, Malaysia. Planners see live stock and a real start date. Warehouse staff record intake, transfers, and production. Drivers run deliveries from a phone.</p>
+    <div class="stage" id="stage">
+      <img id="shot" alt="" />
+      <div class="empty" id="empty" hidden>Screenshot</div>
+      <div class="cap" id="cap"></div>
+      <button class="nav prev" type="button" aria-label="Previous">‹</button>
+      <button class="nav next" type="button" aria-label="Next">›</button>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+  <div class="team" id="team"></div>
+</main>
+<footer class="wrap">Huachang Growmax</footer>
+<script>
+const TEAM = [
+  {
+    name: "Akshaay Dev Singh",
+    id: "105245903",
+    role: "Team Lead, Full Stack",
+    photo: "photos/akshaay.jpg",
+    linkedin: ""
+  },
+  {
+    name: "Adnaan Ayaz Shaikh",
+    id: "105017102",
+    role: "Full Stack",
+    photo: "photos/adnaan.jpg",
+    linkedin: ""
+  },
+  {
+    name: "Song Jun Cheng",
+    id: "105315725",
+    role: "ATP model training, data analysis and database",
+    photo: "photos/song.jpg",
+    linkedin: ""
+  },
+  {
+    name: "Shin Thant Thi Ri",
+    id: "104842811",
+    role: "Frontend and UI/UX Lead",
+    photo: "photos/shin.jpg",
+    linkedin: ""
+  },
+  {
+    name: "Ye Myat Kyaw",
+    id: "105229651",
+    role: "Frontend and Documentation Lead",
+    photo: "photos/ye.jpg",
+    linkedin: ""
+  }
+];
+
+const SLIDES = [
+  { src: "screens/planning.png", caption: "Planning and stock" },
+  { src: "screens/production.png", caption: "Production" },
+  { src: "screens/warehouse.png", caption: "Warehouse" },
+  { src: "screens/delivery.png", caption: "Delivery" }
+];
+let slide = 0;
+const shot = document.getElementById("shot");
+const empty = document.getElementById("empty");
+const cap = document.getElementById("cap");
+const dots = document.getElementById("dots");
+
+function show(index) {
+  slide = (index + SLIDES.length) % SLIDES.length;
+  const item = SLIDES[slide];
+  cap.textContent = item.caption;
+  empty.hidden = false;
+  shot.style.display = "none";
+  shot.alt = item.caption;
+  shot.onload = () => { empty.hidden = true; shot.style.display = "block"; };
+  shot.onerror = () => { empty.hidden = false; shot.style.display = "none"; };
+  shot.src = item.src;
+  dots.querySelectorAll("button").forEach((dot, i) => dot.classList.toggle("on", i === slide));
+}
+
+SLIDES.forEach((_, i) => {
+  const dot = document.createElement("button");
+  dot.type = "button";
+  dot.addEventListener("click", () => show(i));
+  dots.append(dot);
+});
+document.querySelector(".prev").addEventListener("click", () => show(slide - 1));
+document.querySelector(".next").addEventListener("click", () => show(slide + 1));
+show(0);
+
+const team = document.getElementById("team");
+for (const person of TEAM) {
+  const initials = person.name.split(" ").filter(Boolean).slice(0, 2).map(part => part[0]).join("");
+  const card = document.createElement("article");
+  card.className = "card";
+  const photo = document.createElement("div");
+  photo.className = "photo";
+  photo.textContent = initials;
+  const img = new Image();
+  img.onload = () => {
+    photo.style.backgroundImage = `url("${person.photo}")`;
+    photo.textContent = "";
+  };
+  img.src = person.photo;
+  const name = document.createElement("h2");
+  name.textContent = person.name;
+  const role = document.createElement("p");
+  role.className = "role";
+  role.textContent = person.role;
+  const id = document.createElement("p");
+  id.className = "id";
+  id.textContent = person.id;
+  const link = document.createElement("a");
+  link.className = "link" + (person.linkedin ? "" : " missing");
+  link.textContent = person.linkedin ? "LinkedIn" : "LinkedIn";
+  if (person.linkedin) {
+    link.href = person.linkedin;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  }
+  card.append(photo, name, role, id, link);
+  team.append(card);
+}
+</script>
+</body>
+</html>
