@@ -511,23 +511,29 @@
       {
         name: "Shin Thant Thi Ri",
         id: "104842811",
-        roles: ["Frontend Developer", "UI Design Lead"],
+        roles: ["Frontend Developer", "UI/UX Lead"],
         built: [
-          ["Production dashboard", "the overall production summary and data overview"],
-          ["Item management", "managing the items in the system"],
-          ["UI design", "contributed to the design decisions of the system's interface"]
+          ["Operations portal", "the theme, sign-in, app layout and role-based sidebar"],
+          ["Item management", "the item catalog for finished goods and raw materials"],
+          ["Production dashboard", "the production operations overview"],
+          ["Warehouse intake", "the intake wizard and supervisor intake review"],
+          ["Supervisor home", "the warehouse supervisor landing page, and each role opening on its own home"],
+          ["UI/UX", "the interface, layout and user flow of the system"]
         ],
         photo: "photos/shin.jpg",
-        linkedin: ""
+        linkedin: "https://www.linkedin.com/in/shinthantthiri/"
       },
       {
         name: "Ye Myat Kyaw",
         id: "105229651",
-        roles: ["Frontend Developer", "UI Design Lead"],
+        roles: ["Frontend Developer", "QC Developer"],
         built: [
-          ["Intake system", "receiving incoming stock into the warehouse"],
-          ["Finished product QC", "quality inspection of finished goods"],
-          ["UI design", "led the look, layout and user flow of the system"]
+          ["Finished product QC", "verification of finished production orders, including approval, rejection and amendments"],
+          ["Intake system", "the material intake form and supervisor intake review on mobile"],
+          ["Warehouse employee pages", "bottom navigation, the work card and the mobile task screens"],
+          ["Manager home", "the manager landing page, with movements, alerts, the run sheet and quick actions"],
+          ["Production orders", "production orders and material allotment"],
+          ["Order editing", "editing sales orders, purchase orders and collection advices"]
         ],
         photo: "photos/ye.jpg",
         linkedin: "https://www.linkedin.com/in/ye-myat-kyaw-351b45262/"
@@ -622,7 +628,7 @@
         link.target = "_blank";
         link.rel = "noopener noreferrer";
       }
-            const hero = el("div", "hero", initials);
+      const hero = el("div", "hero", initials);
       const heroImg = new Image();
       heroImg.onload = () => {
         hero.style.backgroundImage = `url("${person.photo}")`;
